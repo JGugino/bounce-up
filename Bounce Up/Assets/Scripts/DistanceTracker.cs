@@ -5,7 +5,7 @@ public class DistanceTracker : MonoBehaviour {
 
     public static DistanceTracker instance;
 
-    public GameObject levelGround, ball;
+    public GameObject target, ball;
 
     public TextMeshProUGUI distanceText, highestText;
 
@@ -18,15 +18,18 @@ public class DistanceTracker : MonoBehaviour {
 
 	void Update () {
 
-        playerDistance = Mathf.Round(ball.transform.position.y - levelGround.transform.position.y);
+        playerDistance = Mathf.Round(target.transform.position.y - ball.transform.position.y);
 
         distanceText.text = playerDistance.ToString();
 
-        if (highestDistance < playerDistance)
+        if (highestDistance > playerDistance)
         {
             highestDistance = playerDistance;
 
-            highestText.text = highestDistance.ToString();
+            if (highestText != null)
+            {
+                highestText.text = highestDistance.ToString();
+            }
         }
     }
 

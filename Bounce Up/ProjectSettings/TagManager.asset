@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Double Jump
+  - High Jump
+  - Fast Move
   layers:
   - Default
   - TransparentFX
