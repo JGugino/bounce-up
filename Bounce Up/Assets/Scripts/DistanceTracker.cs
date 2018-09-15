@@ -16,15 +16,24 @@ public class DistanceTracker : MonoBehaviour {
         instance = this;
     }
 
-	void Update () {
+    void Update () {
 
         playerDistance = Mathf.Round(target.transform.position.y - ball.transform.position.y);
 
         distanceText.text = playerDistance.ToString();
 
+        if (highestDistance == 0)
+        {
+            highestDistance = playerDistance;
+        }
+
         if (highestDistance > playerDistance)
         {
             highestDistance = playerDistance;
+
+            Debug.Log(highestDistance);
+
+            LoadingManager.instance.saveHighscore(highestDistance);
 
             if (highestText != null)
             {
@@ -41,5 +50,10 @@ public class DistanceTracker : MonoBehaviour {
     public float getHighestDistance()
     {
         return highestDistance;
+    }
+
+    public void setHighestDistance(float _distance)
+    {
+        highestDistance = _distance;
     }
 }

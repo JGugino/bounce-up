@@ -10,7 +10,7 @@ public class BallController : MonoBehaviour {
     private float bounceForce = 2.4f, moveSpeed = 1f, speedMultiplier = 0.5f, bounceMultiplier = 0.5f;
 
     [SerializeField]
-    private int playerTotalDistance= 0, maxJumps = 1, jumpsLeft = 0;
+    private int maxJumps = 1, jumpsLeft = 0;
 
     private Rigidbody ballRB;
 
@@ -21,6 +21,8 @@ public class BallController : MonoBehaviour {
         jumpsLeft = maxJumps;
 
         ballRB = GetComponent<Rigidbody>();
+
+        LoadingManager.instance.loadHighscore();
     }
 
     void Update () {
@@ -40,6 +42,12 @@ public class BallController : MonoBehaviour {
 
         }else if (isPC)
         {
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                PlayerPrefs.DeleteAll();
+                Debug.LogWarning("PLAYER PREFS HAS BEEN DELETED!");
+            }
+
             if (Input.GetButtonDown("Jump"))
             {
                 if ((jumpsLeft > 0))

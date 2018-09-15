@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class LoadingManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public static LoadingManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+
+    public void saveHighscore(float _highscore)
+    {
+        PlayerPrefs.SetInt("Highscore", (int)_highscore);
+    }
+
+    public void loadHighscore()
+    {
+        float distance = PlayerPrefs.GetInt("Highscore");
+
+        Debug.Log("Prefs Distance: " + distance);
+
+        DistanceTracker.instance.setHighestDistance(distance);
+    }
 }
